@@ -77,6 +77,10 @@ Three constants are all you ever need:
 
 ## Quickstart
 
+> **No gateway yet?** Stand one up with Bifrost in ~30 seconds —
+> `docker run -p 8080:8080 maximhq/bifrost` — then follow the
+> [Bifrost quick start](skills/bifrost-gateway/references/install-bifrost.md).
+
 **1. Install the skill** (for Claude Code / Claude apps). Copy a variant into your
 personal skills directory:
 

@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0]
+
+### Added
+
+- **Bifrost gateway quick start** — a one-time setup guide (Docker / npx, web UI,
+  providers, virtual keys, verify) in `references/install-bifrost.md` for both
+  skill variants, with a short block in each `SKILL.md` and a pointer from the
+  READMEs.
+
 ## [1.0.0]
 
 ### Added

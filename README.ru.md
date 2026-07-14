@@ -79,6 +79,10 @@ flowchart LR
 
 ## Быстрый старт
 
+> **Ещё нет шлюза?** Поднимите Bifrost за ~30 секунд —
+> `docker run -p 8080:8080 maximhq/bifrost` — и следуйте
+> [быстрому старту Bifrost](skills/bifrost-gateway-ru/references/install-bifrost.md).
+
 **1. Установите скилл** (для Claude Code / приложений Claude). Скопируйте нужный
 вариант в свою папку скиллов:
 

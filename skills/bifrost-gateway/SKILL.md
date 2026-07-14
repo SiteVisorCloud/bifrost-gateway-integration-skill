@@ -32,6 +32,21 @@ always a one-line change (the `base_url`) plus using the gateway key.
 > Replace `your-gateway.example.com` with your own gateway host (set it once via
 > the `BIFROST_BASE_URL` env var). Everything else stays identical.
 
+## No gateway yet? — Bifrost quick start (one-time)
+
+If no gateway is running, stand one up with Bifrost (the open-source LLM gateway):
+
+```bash
+docker run -p 8080:8080 -v "$(pwd)/data:/app/data" maximhq/bifrost
+# or, without Docker:  npx -y @maximhq/bifrost
+```
+
+Open `http://localhost:8080`, add your providers' API keys, and create a virtual
+key under Governance (that key — commonly prefixed `sk-bf-` — is your
+`BIFROST_API_KEY`). Then `BIFROST_BASE_URL` is `http://localhost:8080/v1` (or your
+deployed host + `/v1`). Full steps:
+[references/install-bifrost.md](references/install-bifrost.md).
+
 ## The three things you always need
 
 1. **Base URL:** `https://your-gateway.example.com/v1`

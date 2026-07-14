@@ -28,6 +28,21 @@ description: >-
 LLM, направляй его на шлюз, а не на провайдера напрямую.** На практике это почти
 всегда изменение одной строки (`base_url`) плюс использование ключа шлюза.
 
+## Ещё нет шлюза? — быстрый старт Bifrost (разово)
+
+Если шлюз не запущен, подними его через Bifrost (опенсорсный LLM-gateway):
+
+```bash
+docker run -p 8080:8080 -v "$(pwd)/data:/app/data" maximhq/bifrost
+# или без Docker:  npx -y @maximhq/bifrost
+```
+
+Открой `http://localhost:8080`, добавь API-ключи своих провайдеров и создай
+virtual key в разделе Governance (этот ключ — обычно с префиксом `sk-bf-` — и есть
+`BIFROST_API_KEY`). Тогда `BIFROST_BASE_URL` — это `http://localhost:8080/v1` (или
+твой задеплоенный хост + `/v1`). Полные шаги:
+[references/install-bifrost.md](references/install-bifrost.md).
+
 ## Три вещи, которые нужны всегда
 
 1. **Базовый URL:** `https://your-gateway.example.com/v1`
