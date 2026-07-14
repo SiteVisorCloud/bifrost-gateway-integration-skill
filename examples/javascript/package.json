@@ -1,0 +1,16 @@
+{
+  "name": "bifrost-gateway-js-examples",
+  "private": true,
+  "type": "module",
+  "description": "Minimal JS/TS examples routing LLM calls through a Bifrost gateway",
+  "scripts": {
+    "openai": "node openai_sdk.mjs",
+    "fetch": "node fetch.mjs",
+    "vercel": "node vercel_ai_sdk.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.0",
+    "ai": "^4.0.0",
+    "openai": "^4.87.0"
+  }
+}

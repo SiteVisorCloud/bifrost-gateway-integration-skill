@@ -1,0 +1,23 @@
+# Secrets — never commit real gateway keys
+.env
+.env.local
+*.key
+
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Build artifacts
+dist/
+*.skill

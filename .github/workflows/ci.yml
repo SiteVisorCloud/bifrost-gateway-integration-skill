@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          python - <<'PY'
+          import re, sys, pathlib
+
+          errors = []
+          skills = sorted(pathlib.Path("skills").glob("*/SKILL.md"))
+          if not skills:
+              errors.append("no skills/*/SKILL.md found")
+
+          for p in skills:
+              text = p.read_text(encoding="utf-8")
+              m = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
+              if not m:
+                  errors.append(f"{p}: missing YAML frontmatter")
+                  continue
+              fm = m.group(1)
+              if not re.search(r"^name:\s*\S", fm, re.M):
+                  errors.append(f"{p}: missing 'name'")
+              if "description:" not in fm:
+                  errors.append(f"{p}: missing 'description'")
+                  continue
+              desc_raw = fm.split("description:", 1)[1]
+              # Drop a YAML block-scalar indicator (>-, >, |, |-, ...) if present.
+              desc_raw = re.sub(r"^[ \t]*[>|][+-]?", " ", desc_raw)
+              desc = " ".join(desc_raw.split())  # normalize folded scalar
+              if "<" in desc or ">" in desc:
+                  errors.append(f"{p}: description must not contain angle brackets")
+              if len(desc) > 1024:
+                  errors.append(f"{p}: description too long ({len(desc)} > 1024)")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print(f"OK: {len(skills)} SKILL.md file(s) valid")
+          PY
+
+      - name: Anonymization guard (no internal host/brand)
+        run: |
+          # Assemble the forbidden token so this file does not contain it literally.
+          token="$(printf 's%s' 'itevisor')"
+          if grep -RniE "$token" --exclude-dir=.git . ; then
+            echo "::error::Anonymization guard failed: an internal brand/host string was found."
+            exit 1
+          fi
+          echo "Anonymization guard passed."
