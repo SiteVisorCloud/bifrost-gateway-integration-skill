@@ -16,12 +16,12 @@ echo (string) $response;
 
 // 2) Anonymous agent — choose provider + model per call.
 //    provider: 'bifrost'  -> the gateway provider from config/ai.php
-//    model:    'anthropic/claude-3-5-sonnet-20241022' -> Bifrost provider/model
+//    model:    'anthropic/claude-sonnet-5' -> Bifrost provider/model
 $response = agent(instructions: 'You are an expert on Schema.org structured data.')
     ->prompt(
         'Assess this page markup: <html>...</html>',
         provider: 'bifrost',
-        model: 'anthropic/claude-3-5-sonnet-20241022',
+        model: 'anthropic/claude-sonnet-5',
     );
 echo (string) $response;
 
